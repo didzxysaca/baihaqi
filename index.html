@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literasi Digital & AI - Era Teknologi Modern</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'gradient-x': 'gradient-x 12s ease infinite',
+                        'gradient-y': 'gradient-y 12s ease infinite',
+                        'gradient-xy': 'gradient-xy 18s ease infinite',
+                        'float': 'float 4s ease-in-out infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                        'shimmer': 'shimmer 2.5s infinite',
+                        'bounce-custom': 'bounce-custom 2s infinite',
+                        'pulse-custom': 'pulse-custom 3s infinite',
+                        'rotate-slow': 'rotate-slow 20s linear infinite',
+                        'spin-reverse': 'spin-reverse 3s linear infinite',
+                    },
+                    keyframes: {
+                        'gradient-y': {
+                            '0%, 100%': {
+                                'background-size': '400% 400%',
+                                'background-position': 'center top'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'center center'
+                            }
+                        },
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
+                        'gradient-xy': {
+                            '0%, 100%': {
+                                'background-size': '400% 400%',
+                                'background-position': 'left center'
+                            },
+                            '25%': {
+                                'background-size': '400% 400%',
+                                'background-position': 'left top'
+                            },
+                            '50%': {
+                                'background-size': '400% 400%',
+                                'background-position': 'right center'
+                            },
+                            '75%': {
+                                'background-size': '400% 400%',
+                                'background-position': 'right bottom'
+                            }
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-15px) rotate(180deg)' }
+                        },
+                        'glow': {
+                            'from': { 'box-shadow': '0 0 20px rgba(255, 165, 0, 0.5)' },
+                            'to': { 'box-shadow': '0 0 30px rgba(255, 20, 147, 0.8)' }
+                        },
+                        'shimmer': {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' }
+                        },
+                        'bounce-custom': {
+                            '0%, 100%': { transform: 'translateY(0px) scale(1)' },
+                            '50%': { transform: 'translateY(-10px) scale(1.1)' }
+                        },
+                        'pulse-custom': {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: 0.7 }
+                        },
+                        'rotate-slow': {
+                            'from': { transform: 'rotate(0deg)' },
+                            'to': { transform: 'rotate(360deg)' }
+                        },
+                        'spin-reverse': {
+                            'from': { transform: 'rotate(360deg)' },
+                            'to': { transform: 'rotate(0deg)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+        }
+        
+        .glass-hover {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .glass-hover:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.2);
+        }
+
+        .shimmer-overlay {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            animation: shimmer 2.5s infinite;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #FF6B35, #F7931E, #FFD23F);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-alt {
+            background: linear-gradient(135deg, #FF1744, #E91E63, #9C27B0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #1A1A2E, #16213E, #0F3460, #533A7B);
+            background-size: 400% 400%;
+            animation: gradient-xy 18s ease infinite;
+        }
+
+        .floating-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .float-shape {
+            position: absolute;
+            opacity: 0.08;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .float-shape:nth-child(1) {
+            top: 15%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .float-shape:nth-child(2) {
+            top: 70%;
+            right: 15%;
+            animation-delay: 1.5s;
+        }
+
+        .float-shape:nth-child(3) {
+            bottom: 25%;
+            left: 25%;
+            animation-delay: 3s;
+        }
+
+        .float-shape:nth-child(4) {
+            top: 40%;
+            right: 30%;
+            animation-delay: 4.5s;
+        }
+
+        .neon-border {
+            box-shadow: 0 0 25px rgba(255, 107, 53, 0.4), 
+                       0 0 50px rgba(255, 107, 53, 0.2), 
+                       0 0 100px rgba(255, 107, 53, 0.1);
+        }
+
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(255, 107, 53, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 107, 53, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen relative">
+    <!-- Floating Background Elements -->
+    <div class="floating-elements">
+        <div class="float-shape w-28 h-28 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full"></div>
+        <div class="float-shape w-36 h-36 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></div>
+        <div class="float-shape w-20 h-20 bg-gradient-to-r from-red-500 to-pink-500 rounded-full"></div>
+        <div class="float-shape w-32 h-32 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full"></div>
+    </div>
+
+    <!-- Animated Progress Bar -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-900 z-50">
+        <div id="scroll-progress" class="h-full bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 transition-all duration-300 ease-out"></div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8 relative z-10">
+        <!-- Hero Header -->
+        <header class="glass-morphism glass-hover rounded-3xl p-10 mb-16 text-center shimmer-overlay neon-border">
+            <div class="text-6xl md:text-8xl font-bold mb-6 animate-bounce-custom">
+                🚀
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-gradient-x">
+                Literasi Digital & AI
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 animate-pulse-custom mb-8">
+                Menguasai Teknologi untuk Masa Depan Digital
+            </p>
+            <div class="flex justify-center space-x-3">
+                <div class="w-3 h-3 bg-orange-500 rounded-full animate-bounce-custom"></div>
+                <div class="w-3 h-3 bg-red-500 rounded-full animate-bounce-custom" style="animation-delay: 0.2s"></div>
+                <div class="w-3 h-3 bg-pink-500 rounded-full animate-bounce-custom" style="animation-delay: 0.4s"></div>
+                <div class="w-3 h-3 bg-purple-500 rounded-full animate-bounce-custom" style="animation-delay: 0.6s"></div>
+            </div>
+        </header>
+
+        <!-- Era Digital -->
+        <section class="glass-morphism glass-hover rounded-3xl p-8 mb-16 shimmer-overlay cyber-grid">
+            <div class="text-5xl md:text-7xl font-bold mb-4 text-center animate-rotate-slow">
+                💻
+            </div>
+            <h2 class="text-4xl font-bold mb-8 text-center text-gradient">
+                Era Transformasi Digital
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-morphism glass-hover rounded-2xl p-6 text-center bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-500/30 hover:border-orange-400/50">
+                    <div class="text-5xl mb-4 animate-spin-reverse">⚡</div>
+                    <h3 class="text-xl font-bold mb-3 text-orange-400">Internet of Things</h3>
+                    <p class="text-gray-300 text-sm">Konektivitas perangkat yang mengubah cara hidup kita sehari-hari</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-6 text-center bg-gradient-to-br from-red-500/20 to-pink-500/20 border border-red-500/30 hover:border-red-400/50">
+                    <div class="text-5xl mb-4 animate-bounce-custom">☁️</div>
+                    <h3 class="text-xl font-bold mb-3 text-red-400">Cloud Computing</h3>
+                    <p class="text-gray-300 text-sm">Penyimpanan dan komputasi berbasis cloud untuk efisiensi maksimal</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-6 text-center bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30 hover:border-pink-400/50">
+                    <div class="text-5xl mb-4 animate-pulse-custom">📱</div>
+                    <h3 class="text-xl font-bold mb-3 text-pink-400">Mobile First</h3>
+                    <p class="text-gray-300 text-sm">Era smartphone yang mendominasi akses digital global</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-6 text-center bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-purple-500/30 hover:border-purple-400/50">
+                    <div class="text-5xl mb-4 animate-float">🌐</div>
+                    <h3 class="text-xl font-bold mb-3 text-purple-400">Web 3.0</h3>
+                    <p class="text-gray-300 text-sm">Internet generasi baru yang lebih cerdas dan terdesentralisasi</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Revolusi AI -->
+        <section class="glass-morphism glass-hover rounded-3xl p-8 mb-16 shimmer-overlay">
+            <div class="text-5xl md:text-7xl font-bold mb-4 text-center animate-glow">
+                🤖
+            </div>
+            <h2 class="text-4xl font-bold mb-8 text-center text-gradient-alt">
+                Revolusi Kecerdasan Buatan
+            </h2>
+            <div class="relative">
+                <div class="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-orange-500 via-red-500 to-pink-500 rounded-full"></div>
+                <div class="space-y-8">
+                    <div class="flex items-start space-x-6 transform hover:scale-105 transition-all duration-500">
+                        <div class="w-8 h-8 bg-orange-500 rounded-full flex-shrink-0 mt-2 animate-pulse-custom shadow-xl"></div>
+                        <div class="glass-morphism rounded-2xl p-8 flex-1 hover:bg-white/15 transition-all duration-500">
+                            <div class="text-3xl font-bold text-orange-400 mb-3">Generative AI</div>
+                            <p class="text-gray-300 text-lg"><strong class="text-white">ChatGPT, DALL-E, Midjourney:</strong> AI yang mampu menciptakan konten kreatif seperti teks, gambar, dan video dengan kualitas hampir seperti buatan manusia.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-6 transform hover:scale-105 transition-all duration-500">
+                        <div class="w-8 h-8 bg-red-500 rounded-full flex-shrink-0 mt-2 animate-pulse-custom shadow-xl"></div>
+                        <div class="glass-morphism rounded-2xl p-8 flex-1 hover:bg-white/15 transition-all duration-500">
+                            <div class="text-3xl font-bold text-red-400 mb-3">Computer Vision</div>
+                            <p class="text-gray-300 text-lg"><strong class="text-white">Pengenalan Visual:</strong> AI dapat menganalisis dan memahami gambar, video, serta objek dalam dunia nyata dengan akurasi tinggi.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-6 transform hover:scale-105 transition-all duration-500">
+                        <div class="w-8 h-8 bg-pink-500 rounded-full flex-shrink-0 mt-2 animate-pulse-custom shadow-xl"></div>
+                        <div class="glass-morphism rounded-2xl p-8 flex-1 hover:bg-white/15 transition-all duration-500">
+                            <div class="text-3xl font-bold text-pink-400 mb-3">Autonomous Systems</div>
+                            <p class="text-gray-300 text-lg"><strong class="text-white">Mobil Otonom & Robotika:</strong> Sistem yang dapat beroperasi secara mandiri tanpa campur tangan manusia.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-6 transform hover:scale-105 transition-all duration-500">
+                        <div class="w-8 h-8 bg-purple-500 rounded-full flex-shrink-0 mt-2 animate-pulse-custom shadow-xl"></div>
+                        <div class="glass-morphism rounded-2xl p-8 flex-1 hover:bg-white/15 transition-all duration-500">
+                            <div class="text-3xl font-bold text-purple-400 mb-3">AI in Healthcare</div>
+                            <p class="text-gray-300 text-lg"><strong class="text-white">Medis Presisi:</strong> Diagnosis penyakit, penemuan obat, dan personalisasi pengobatan dengan bantuan AI.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teknologi Emerging -->
+        <section class="glass-morphism glass-hover rounded-3xl p-8 mb-16 shimmer-overlay">
+            <div class="text-5xl md:text-7xl font-bold mb-4 text-center animate-float">
+                🔮
+            </div>
+            <h2 class="text-4xl font-bold mb-8 text-center text-gradient">
+                Teknologi Masa Depan
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-morphism glass-hover rounded-2xl p-8 text-center bg-gradient-to-br from-orange-500/20 to-yellow-500/20 border border-orange-500/30 hover:border-orange-400/50">
+                    <div class="text-6xl mb-6 animate-rotate-slow">🥽</div>
+                    <h3 class="text-2xl font-bold mb-4 text-orange-400">Virtual Reality</h3>
+                    <p class="text-gray-300">Pengalaman immersive yang mengubah cara kita berinteraksi dengan dunia digital</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-8 text-center bg-gradient-to-br from-red-500/20 to-pink-500/20 border border-red-500/30 hover:border-red-400/50">
+                    <div class="text-6xl mb-6 animate-bounce-custom">⛓️</div>
+                    <h3 class="text-2xl font-bold mb-4 text-red-400">Blockchain</h3>
+                    <p class="text-gray-300">Teknologi terdistribusi yang mengamankan transaksi dan data digital</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-8 text-center bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30 hover:border-pink-400/50">
+                    <div class="text-6xl mb-6 animate-spin-reverse">🔬</div>
+                    <h3 class="text-2xl font-bold mb-4 text-pink-400">Quantum Computing</h3>
+                    <p class="text-gray-300">Komputasi kuantum yang akan merevolusi pemrosesan data kompleks</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manfaat & Tantangan -->
+        <section class="glass-morphism glass-hover rounded-3xl p-8 mb-16 shimmer-overlay">
+            <div class="text-5xl md:text-7xl font-bold mb-4 text-center animate-glow">
+                ⚖️
+            </div>
+            <h2 class="text-4xl font-bold mb-8 text-center text-gradient-alt">
+                Peluang & Tantangan Digital
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="glass-morphism rounded-2xl p-8 bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-500/30 hover:border-green-400/50 hover:scale-105 transition-all duration-500">
+                    <h3 class="text-3xl font-bold mb-6 text-green-400 text-center">🌟 Peluang Luar Biasa</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-green-400 text-2xl">✨</span>
+                            <span class="text-gray-300 text-lg">Karier baru di bidang AI, Data Science, Cybersecurity</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-green-400 text-2xl">✨</span>
+                            <span class="text-gray-300 text-lg">Startup teknologi dan inovasi digital</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-green-400 text-2xl">✨</span>
+                            <span class="text-gray-300 text-lg">Pendidikan online dan akses global</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-green-400 text-2xl">✨</span>
+                            <span class="text-gray-300 text-lg">Telemedicine dan kesehatan digital</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-green-400 text-2xl">✨</span>
+                            <span class="text-gray-300 text-lg">E-commerce dan ekonomi digital</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="glass-morphism rounded-2xl p-8 bg-gradient-to-br from-red-500/20 to-orange-500/20 border border-red-500/30 hover:border-red-400/50 hover:scale-105 transition-all duration-500">
+                    <h3 class="text-3xl font-bold mb-6 text-red-400 text-center">⚠️ Tantangan Serius</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-red-400 text-2xl">🔥</span>
+                            <span class="text-gray-300 text-lg">Kesenjangan digital dan akses teknologi</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-red-400 text-2xl">🔥</span>
+                            <span class="text-gray-300 text-lg">Cybersecurity dan ancaman siber</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-red-400 text-2xl">🔥</span>
+                            <span class="text-gray-300 text-lg">Disinformasi dan hoax digital</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-red-400 text-2xl">🔥</span>
+                            <span class="text-gray-300 text-lg">Ketergantungan teknologi berlebihan</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-red-400 text-2xl">🔥</span>
+                            <span class="text-gray-300 text-lg">Privacy dan perlindungan data pribadi</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Digital Citizenship -->
+        <section class="glass-morphism glass-hover rounded-3xl p-8 mb-16 shimmer-overlay cyber-grid">
+            <div class="text-5xl md:text-7xl font-bold mb-4 text-center animate-pulse-custom">
+                🛡️
+            </div>
+            <h2 class="text-4xl font-bold mb-8 text-center text-gradient">
+                Kewarganegaraan Digital
+            </h2>
+            <p class="text-center text-xl text-gray-300 mb-10 animate-pulse-custom">
+                Menjadi warga digital yang bertanggung jawab dan cerdas
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-morphism glass-hover rounded-2xl p-8 text-center bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-500/30 hover:border-orange-400/50 transform hover:scale-110 transition-all duration-500">
+                    <div class="text-6xl mb-6 animate-bounce-custom">🔐</div>
+                    <h4 class="text-xl font-bold text-orange-400 mb-2">Keamanan Digital</h4>
+                    <p class="text-gray-300 text-sm">Password kuat, 2FA, update software</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-8 text-center bg-gradient-to-br from-red-500/20 to-pink-500/20 border border-red-500/30 hover:border-red-400/50 transform hover:scale-110 transition-all duration-500">
+                    <div class="text-6xl mb-6 animate-spin-reverse">🎭</div>
+                    <h4 class="text-xl font-bold text-red-400 mb-2">Identitas Digital</h4>
+                    <p class="text-gray-300 text-sm">Kelola jejak digital dan reputasi online</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-8 text-center bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30 hover:border-pink-400/50 transform hover:scale-110 transition-all duration-500">
+                    <div class="text-6xl mb-6 animate-float">📊</div>
+                    <h4 class="text-xl font-bold text-pink-400 mb-2">Literasi Data</h4>
+                    <p class="text-gray-300 text-sm">Memahami dan menganalisis informasi digital</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-8 text-center bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-purple-500/30 hover:border-purple-400/50 transform hover:scale-110 transition-all duration-500">
+                    <div class="text-6xl mb-6 animate-glow">🤝</div>
+                    <h4 class="text-xl font-bold text-purple-400 mb-2">Kolaborasi Virtual</h4>
+                    <p class="text-gray-300 text-sm">Bekerja sama dalam lingkungan digital</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-8 text-center bg-gradient-to-br from-indigo-500/20 to-blue-500/20 border border-indigo-500/30 hover:border-indigo-400/50 transform hover:scale-110 transition-all duration-500">
+                    <div class="text-6xl mb-6 animate-rotate-slow">⚡</div>
+                    <h4 class="text-xl font-bold text-indigo-400 mb-2">Inovasi Digital</h4>
+                    <p class="text-gray-300 text-sm">Menciptakan solusi teknologi baru</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-8 text-center bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30 hover:border-blue-400/50 transform hover:scale-110 transition-all duration-500">
+                    <div class="text-6xl mb-6 animate-pulse-custom">🌍</div>
+                    <h4 class="text-xl font-bold text-blue-400 mb-2">Global Awareness</h4>
+                    <p class="text-gray-300 text-sm">Memahami dampak teknologi secara global</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Smart vs Unwise Digital Behavior -->
+        <section class="glass-morphism glass-hover rounded-3xl p-8 mb-16 shimmer-overlay">
+            <div class="text-5xl md:text-7xl font-bold mb-4 text-center animate-gradient-x">
+                🧠
+            </div>
+            <h2 class="text-4xl font-bold mb-8 text-center text-gradient-alt">
+                Perilaku Digital: Cerdas vs Tidak Bijak
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="glass-morphism rounded-2xl p-8 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 hover:border-emerald-400/50 hover:scale-105 transition-all duration-500">
+                    <h3 class="text-3xl font-bold mb-6 text-emerald-400 text-center">🎯 Perilaku Digital Cerdas</h3>
+                    <h4 class="text-xl font-semibold mb-4 text-emerald-300">Dampak Positif:</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-emerald-400 text-2xl">🚀</span>
+                            <span class="text-gray-300 text-lg">Membangun personal branding yang kuat</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-emerald-400 text-2xl">🚀</span>
+                            <span class="text-gray-300 text-lg">Networking global dan peluang karier</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-emerald-400 text-2xl">🚀</span>
+                            <span class="text-gray-300 text-lg">Akses pembelajaran unlimited</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-emerald-400 text-2xl">🚀</span>
+                            <span class="text-gray-300 text-lg">Produktivitas maksimal dengan AI tools</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-emerald-400 text-2xl">🚀</span>
+                            <span class="text-gray-300 text-lg">Digital wellness dan mental health</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-emerald-400 text-2xl">🚀</span>
+                            <span class="text-gray-300 text-lg">Kontribusi positif untuk komunitas</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="glass-morphism rounded-2xl p-8 bg-gradient-to-br from-red-500/20 to-orange-500/20 border border-red-500/30 hover:border-red-400/50 hover:scale-105 transition-all duration-500">
+                    <h3 class="text-3xl font-bold mb-6 text-red-400 text-center">💥 Perilaku Digital Tidak Bijak</h3>
+                    <h4 class="text-xl font-semibold mb-4 text-red-300">Konsekuensi Negatif:</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-red-400 text-2xl">💣</span>
+                            <span class="text-gray-300 text-lg">Digital footprint yang merusak karier</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-red-400 text-2xl">💣</span>
+                            <span class="text-gray-300 text-lg">Menjadi korban scam dan penipuan online</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-red-400 text-2xl">💣</span>
+                            <span class="text-gray-300 text-lg">Kecanduan media sosial dan gaming</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-red-400 text-2xl">💣</span>
+                            <span class="text-gray-300 text-lg">Menyebar misinformasi dan hate speech</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-red-400 text-2xl">💣</span>
+                            <span class="text-gray-300 text-lg">Kehilangan privasi dan data personal</span>
+                        </li>
+                        <li class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                            <span class="text-red-400 text-2xl">💣</span>
+                            <span class="text-gray-300 text-lg">Isolasi sosial dan masalah mental</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Sukses Era Digital -->
+        <section class="glass-morphism glass-hover rounded-3xl p-8 mb-16 shimmer-overlay neon-border">
+            <div class="text-5xl md:text-7xl font-bold mb-4 text-center animate-rotate-slow">
+                💎
+            </div>
+            <h2 class="text-4xl font-bold mb-8 text-center text-gradient">
+                Strategi Sukses Era Digital
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-morphism glass-hover rounded-2xl p-8 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 hover:border-yellow-400/50 hover:rotate-3 transition-all duration-500">
+                    <div class="text-6xl mb-6 animate-bounce-custom">📚</div>
+                    <h3 class="text-2xl font-bold mb-4 text-yellow-400">Continuous Learning</h3>
+                    <p class="text-gray-300">Selalu update dengan teknologi terbaru, ikuti course online, dan praktikkan skill baru setiap hari.</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-8 bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-500/30 hover:border-orange-400/50 hover:-rotate-3 transition-all duration-500">
+                    <div class="text-6xl mb-6 animate-spin-reverse">🔗</div>
+                    <h3 class="text-2xl font-bold mb-4 text-orange-400">Smart Networking</h3>
+                    <p class="text-gray-300">Bangun koneksi berkualitas, join komunitas tech, dan aktif di platform profesional seperti LinkedIn.</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-8 bg-gradient-to-br from-red-500/20 to-pink-500/20 border border-red-500/30 hover:border-red-400/50 hover:rotate-2 transition-all duration-500">
+                    <div class="text-6xl mb-6 animate-float">🎨</div>
+                    <h3 class="text-2xl font-bold mb-4 text-red-400">Creative Content</h3>
+                    <p class="text-gray-300">Ciptakan konten original, share knowledge, dan bangun audience yang engaged di platform digital.</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-8 bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30 hover:border-pink-400/50 hover:-rotate-2 transition-all duration-500">
+                    <div class="text-6xl mb-6 animate-glow">⚙️</div>
+                    <h3 class="text-2xl font-bold mb-4 text-pink-400">Automation Mastery</h3>
+                    <p class="text-gray-300">Manfaatkan AI tools untuk otomatisasi task, tingkatkan efisiensi, dan fokus pada high-value activities.</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-8 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-purple-500/30 hover:border-purple-400/50 hover:rotate-1 transition-all duration-500">
+                    <div class="text-6xl mb-6 animate-pulse-custom">🛡️</div>
+                    <h3 class="text-2xl font-bold mb-4 text-purple-400">Digital Security</h3>
+                    <p class="text-gray-300">Prioritaskan cybersecurity, gunakan VPN, backup data rutin, dan stay alert terhadap ancaman digital.</p>
+                </div>
+                <div class="glass-morphism glass-hover rounded-2xl p-8 bg-gradient-to-br from-indigo-500/20 to-blue-500/20 border border-indigo-500/30 hover:border-indigo-400/50 hover:-rotate-1 transition-all duration-500">
+                    <div class="text-6xl mb-6 animate-bounce-custom">🌱</div>
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-400">Digital Wellbeing</h3>
+                    <p class="text-gray-300">Jaga keseimbangan digital-analog, digital detox berkala, dan mindful dalam konsumsi konten.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="glass-morphism glass-hover rounded-3xl p-10 text-center shimmer-overlay neon-border">
+            <div class="mb-8">
+                <h3 class="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-400 via-red-500 to-pink-500 bg-clip-text text-transparent">
+                    Dipersembahkan Oleh
+                </h3>
+                <div class="text-4xl font-bold text-white mb-4 animate-glow">
+                    Ahmad Baihaqi
+                </div>
+                <div class="text-2xl text-gray-300 mb-2 animate-pulse-custom">
+                    (02)
+                </div>
+                <div class="text-2xl text-gray-300 mb-6 animate-pulse-custom">
+                    X TPM 2
+                </div>
+                <div class="flex justify-center space-x-3 mb-6">
+                    <div class="w-4 h-4 bg-orange-500 rounded-full animate-bounce-custom"></div>
+                    <div class="w-4 h-4 bg-red-500 rounded-full animate-bounce-custom" style="animation-delay: 0.2s"></div>
+                    <div class="w-4 h-4 bg-pink-500 rounded-full animate-bounce-custom" style="animation-delay: 0.4s"></div>
+                    <div class="w-4 h-4 bg-purple-500 rounded-full animate-bounce-custom" style="animation-delay: 0.6s"></div>
+                </div>
+            </div>
+            <div class="border-t border-white/15 pt-8">
+                <p class="text-gray-400 mb-3 text-lg">© 2025 - Literasi Digital & AI Era Modern</p>
+                <p class="text-gray-500">Membangun Generasi Digital yang Cerdas dan Bertanggung Jawab</p>
+                <div class="mt-6 text-6xl animate-rotate-slow">🚀</div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Enhanced scroll progress with gradient animation
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('scroll-progress').style.width = scrollPercent + '%';
+        });
+
+        // Advanced intersection observer with staggered animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const intersectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                    
+                    // Add staggered animation for child elements
+                    const children = entry.target.querySelectorAll('.glass-morphism');
+                    children.forEach((child, childIndex) => {
+                        setTimeout(() => {
+                            child.style.opacity = '1';
+                            child.style.transform = 'translateY(0) scale(1)';
+                        }, childIndex * 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Initialize enhanced animations
+        document.querySelectorAll('section').forEach((section, index) => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px) scale(0.95)';
+            section.style.transition = `all 1s cubic-bezier(0.25, 0.8, 0.25, 1) ${index * 0.1}s`;
+            intersectionObserver.observe(section);
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.float-shape');
+            
+            parallax.forEach((element, index) => {
+                const speed = (index + 1) * 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+            });
+        });
+
+        // Dynamic background gradient based on scroll
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.pageYOffset / (document.body.offsetHeight - window.innerHeight)) * 100;
+            const hue1 = 220 + (scrollPercent * 0.5);
+            const hue2 = 280 + (scrollPercent * 0.8);
+            const hue3 = 340 + (scrollPercent * 0.3);
+            
+            document.body.style.background = `linear-gradient(-45deg, hsl(${hue1}, 60%, 15%), hsl(${hue2}, 55%, 18%), hsl(${hue3}, 50%, 20%), hsl(${hue1 + 40}, 45%, 22%))`;
+        });
+
+        // Enhanced smooth scrolling
+        document.documentElement.style.scrollBehavior = 'smooth';
+        
+        // Mouse tracking effect
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                const cursorElement = document.createElement('div');
+                cursorElement.className = 'cursor fixed w-6 h-6 bg-gradient-to-r from-orange-400 to-pink-500 rounded-full pointer-events-none z-50 opacity-20 mix-blend-difference';
+                document.body.appendChild(cursorElement);
+            }
+            
+            const cursorElement = document.querySelector('.cursor');
+            cursorElement.style.left = e.clientX - 12 + 'px';
+            cursorElement.style.top = e.clientY - 12 + 'px';
+        });
+    </script>
+</body>
+</html>
